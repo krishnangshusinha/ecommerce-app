@@ -5,6 +5,8 @@ import { useAuth } from '../../context/auth';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
+
 const Profile = () => {
     const [auth, setAuth] = useAuth();
 
@@ -18,7 +20,7 @@ const Profile = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          const { data } = await axios.put(`${process.env.REACT_APP_API}/api/v1/auth/profile`, {
+          const { data } = await axios.put(`${REACT_APP_API}/api/v1/auth/profile`, {
             name,
             email,
             password,
