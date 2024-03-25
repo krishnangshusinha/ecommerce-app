@@ -8,6 +8,9 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import '../styles/CartStyles.css';
 
+
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
+
 const CartPage = () => {
     const [auth , setAuth] = useAuth();
     const [cart , setCart] = useCart();
@@ -54,7 +57,7 @@ const CartPage = () => {
   // gets client token
   const getToken = async () => {
     try {
-        const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/braintree/token`);
+        const {data} = await axios.get(`${REACT_APP_API}/api/v1/product/braintree/token`);
         setClientToken(data?.clientToken);
     } 
     catch (error) {
@@ -72,7 +75,7 @@ const CartPage = () => {
     try {
         setLoading(true);
         const {nonce} = await instance.requestPaymentMethod();
-        const {data} = await axios.post(`${process.env.REACT_APP_API}/api/v1/product/braintree/payments`, {nonce , cart});
+        const {data} = await axios.post(`${REACT_APP_API}/api/v1/product/braintree/payments`, {nonce , cart});
         setLoading(false);
         localStorage.removeItem("cart");        // since payment is done so make the cart empty
         setCart([]);
@@ -111,7 +114,7 @@ const CartPage = () => {
                             <div className="row card flex-row" key={p._id}>
                                 <div className="col-md-4">
                                     <img
-                                    src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
+                                    src={`${REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                                     className="card-img-top"
                                     alt={p.name}
                                     width="100%"
