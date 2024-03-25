@@ -4,6 +4,8 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios';
 import "../styles/ProductDetailsStyles.css";
 
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
+
 const ProductDetails = () => {
   const params = useParams();
   const [product , setProduct] = useState({});
@@ -14,7 +16,7 @@ const ProductDetails = () => {
   // get single products detials
   const getProduct = async () => {
     try {
-        const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/get-product/${params.slug}`);
+        const {data} = await axios.get(`${REACT_APP_API}/api/v1/product/get-product/${params.slug}`);
         setProduct(data?.product);
         getSimilarProducts(data?.product._id , data?.product.category._id);
     } 
@@ -33,7 +35,7 @@ const ProductDetails = () => {
   // function to get similar products
   const getSimilarProducts = async (pid,cid) => {
     try {
-        const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/related-product/${pid}/${cid}`)
+        const {data} = await axios.get(`${REACT_APP_API}/api/v1/product/related-product/${pid}/${cid}`)
         setRelatedProducts(data?.products);
     } 
     catch (error) {
@@ -46,7 +48,7 @@ const ProductDetails = () => {
         <div className="row container product-details">
             <div className="col-md-6">
                 <img
-                    src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
+                    src={`${REACT_APP_API}/api/v1/product/product-photo/${product._id}`}
                     className="card-img-top"
                     alt={product.name}
                     height="300"
@@ -79,7 +81,7 @@ const ProductDetails = () => {
                 {relatedProducts?.map((p) => (
                     <div className="card m-2" key={p._id}>
                         <img
-                            src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
+                            src={`${REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                             className="card-img-top"
                             alt={p.name}
                         />
