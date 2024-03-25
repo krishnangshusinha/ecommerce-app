@@ -8,6 +8,8 @@ import { useCart } from '../context/cart';
 import toast from 'react-hot-toast';
 import '../styles/HomePage.css';
 
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
+
 const HomePage = () => {
   const [products , setProducts] = useState();
   const [categories , setCategories] = useState();
@@ -25,7 +27,7 @@ const HomePage = () => {
   const getAllCategory = async () => {
     try {
       // getting data from the backend from this URL
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`); 
+      const {data} = await axios.get(`${REACT_APP_API}/api/v1/category/get-category`); 
 
       if( data?.success ){
         setCategories(data?.category);
@@ -46,7 +48,7 @@ const HomePage = () => {
   const getAllProduct = async() => {
     try{
       setLoading(true);
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`);    // getting the poducts 
+      const {data} = await axios.get(`${REACT_APP_API}/api/v1/product/product-list/${page}`);    // getting the poducts 
       setLoading(false);
       setProducts(data.products);     // setting the products
     }
@@ -74,7 +76,7 @@ const HomePage = () => {
   const filterProducts = async() => {
     try{
       
-      const {data} = await axios.post(`${process.env.REACT_APP_API}/api/v1/product/product-filters`, {checked , radio});
+      const {data} = await axios.post(`${REACT_APP_API}/api/v1/product/product-filters`, {checked , radio});
       setProducts(data.products);   // updating current product list by all the filtered data
       
     }
@@ -86,7 +88,7 @@ const HomePage = () => {
   // get total count of products
   const getTotal = async() => {
     try{
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/product-count`);    // getting response from the URL
+      const {data} = await axios.get(`${REACT_APP_API}/api/v1/product/product-count`);    // getting response from the URL
       setTotal(data?.total);    // updating total count of products
     }
     catch(error){
@@ -98,7 +100,7 @@ const HomePage = () => {
   const loadMore = async () => {
     try{
       setLoading(true);
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/product-list/${page}`);
+      const {data} = await axios.get(`${REACT_APP_API}/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts([...products , ...data?.products]);
     }
@@ -173,7 +175,7 @@ const HomePage = () => {
 
                   <div className="card m-2" key={p._id}>
                     <img
-                      src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
+                      src={`${REACT_APP_API}/api/v1/product/product-photo/${p._id}`}
                       className="card-img-top"
                       alt={p.name}
                     />
