@@ -2,6 +2,8 @@ import React from "react";
 import Layout from "../components/Layouts/layout.js";
 import { useSearch } from "../context/Search.js";
 
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
+
 const Search = () => {
 
   const [values, setValues] = useSearch();
