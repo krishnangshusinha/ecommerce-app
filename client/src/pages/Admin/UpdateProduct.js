@@ -7,6 +7,7 @@ import { Select } from 'antd';
 import { useNavigate, useParams } from 'react-router-dom';
 const {Option} = Select;        // this Option can be used to make a drop down list
 
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
 
 const UpdateProduct = () => {
 
@@ -27,7 +28,7 @@ const UpdateProduct = () => {
   const getSingleProduct = async () => {
     try {
         // fetching from the backend
-        const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/product/get-product/${params.slug}`)
+        const {data} = await axios.get(`${REACT_APP_API}/api/v1/product/get-product/${params.slug}`)
         setName(data.product.name);
         setId(data.product._id);
         setDescription(data.product.description);
@@ -50,7 +51,7 @@ const UpdateProduct = () => {
   const getAllCategory = async () => {
     try {
       // getting data from the backend from this URL
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`); 
+      const {data} = await axios.get(`${REACT_APP_API}/api/v1/category/get-category`); 
 
       if( data?.success ){
         setCategories(data?.category);
@@ -81,7 +82,7 @@ const UpdateProduct = () => {
       photo && productData.append("photo", photo);        // if photo present then only append it
       productData.append("category", category);
 
-      const {data} = await axios.put(`${process.env.REACT_APP_API}/api/v1/product/update-product/${id}`, productData);   // all values are passed via this productData
+      const {data} = await axios.put(`${REACT_APP_API}/api/v1/product/update-product/${id}`, productData);   // all values are passed via this productData
 
       if( data?.success ){
         toast.success("Product updated Successfully");
@@ -108,7 +109,7 @@ const UpdateProduct = () => {
             return;
         }
 
-        const {data} = await axios.delete(`${process.env.REACT_APP_API}/api/v1/product/delete-product/${id}`);
+        const {data} = await axios.delete(`${REACT_APP_API}/api/v1/product/delete-product/${id}`);
         toast.success("Product deleted Successfully");
         navigate("/dashboard/admin/products");
            
@@ -159,7 +160,7 @@ const UpdateProduct = () => {
                                         </div>
                                     ): (
                                         <div className='text-center'>
-                                        <img src={`${process.env.REACT_APP_API}/api/v1/product/product-photo/${id}`} alt='product_photo' height={"200px"} className='img img-responsive' />
+                                        <img src={`${REACT_APP_API}/api/v1/product/product-photo/${id}`} alt='product_photo' height={"200px"} className='img img-responsive' />
                                         </div>
                                     )
                                     }
