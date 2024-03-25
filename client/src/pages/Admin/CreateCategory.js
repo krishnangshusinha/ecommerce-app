@@ -6,6 +6,8 @@ import toast from 'react-hot-toast'
 import CategoryForm from '../../components/Form/CategoryForm'
 import { Modal } from "antd";
 
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
+
 const CreateCategory = () => {
   const [categories , setCategories] = useState([]);    // array to store all categories
   const [name, setName] = useState();
@@ -19,7 +21,7 @@ const CreateCategory = () => {
 
     try {
       // posts this request by sending the "name" to the backend
-      const {data} = await  axios.post(`${process.env.REACT_APP_API}/api/v1/category/create-category`, {name});
+      const {data} = await  axios.post(`${REACT_APP_API}/api/v1/category/create-category`, {name});
 
       if( data?.success ){
         toast.success(`${name} is created`);
@@ -42,7 +44,7 @@ const CreateCategory = () => {
     try {
 
       // put this request by sending the "name" as "updatedName" to the backend.
-      const {data} = await  axios.put(`${process.env.REACT_APP_API}/api/v1/category/update-category/${selected._id}`, {name:updatedName});
+      const {data} = await  axios.put(`${REACT_APP_API}/api/v1/category/update-category/${selected._id}`, {name:updatedName});
       
       if( data?.success ){
         toast.success(`${updatedName} is updated`);
@@ -66,7 +68,7 @@ const CreateCategory = () => {
     try {
 
       // put this request by sending the "name" as "updatedName" to the backend.
-      const {data} = await  axios.delete(`${process.env.REACT_APP_API}/api/v1/category/delete-category/${pid}`);
+      const {data} = await  axios.delete(`${REACT_APP_API}/api/v1/category/delete-category/${pid}`);
       
       if( data?.success ){
         toast.success(`Category is deleted`);
@@ -85,7 +87,7 @@ const CreateCategory = () => {
   const getAllCategory = async () => {
     try {
       // getting data from the backend from this URL
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`); 
+      const {data} = await axios.get(`${REACT_APP_API}/api/v1/category/get-category`); 
 
       if( data?.success ){
         setCategories(data?.category);
