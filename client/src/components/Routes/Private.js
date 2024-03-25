@@ -4,6 +4,8 @@ import { Outlet } from "react-router-dom";
 import Spinner from "../Spinner";
 import axios from "axios";
 
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
+
 export default function PrivateRoute() {
 
     const [ok , setOK] = useState(false);
@@ -12,7 +14,7 @@ export default function PrivateRoute() {
     useEffect(()=>{
         const authCheck = async () => {
 
-            const res = await axios.get(`${process.env.REACT_APP_API}/api/v1/auth/user-auth`);      // getting the GET request from server
+            const res = await axios.get(`${REACT_APP_API}/api/v1/auth/user-auth`);      // getting the GET request from server
 
             if( res.data.ok ){
                 setOK(true);
