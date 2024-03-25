@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import '../../styles/AuthStyles.css';
 
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
+
 const Register = () => {
 
     const [name,setName] = useState("");
@@ -22,7 +24,7 @@ const Register = () => {
         
         try {
             
-            const res = await axios.post(`${process.env.REACT_APP_API}/api/v1/auth/register`, {name,password,email,phone,address,answer});      // gets the response sent in this URL by the server
+            const res = await axios.post(`${REACT_APP_API}/api/v1/auth/register`, {name,password,email,phone,address,answer});      // gets the response sent in this URL by the server
 
             if( res.data.success ){     // if you remember we had a success property in the response i.e set from the server(in authController in the registerController())
                 toast.success(res.data.message);
