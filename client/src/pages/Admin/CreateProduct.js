@@ -7,6 +7,8 @@ import { Select } from 'antd';
 import { useNavigate } from 'react-router-dom';
 const {Option} = Select;        // this Option can be used to make a drop down list
 
+let REACT_APP_API = "https://ecommerce-app-sx2y.onrender.com"
+
 const CreateProduct = () => {
   const [categories , setCategories] = useState([]);
   const [name, setName] = useState("");
@@ -23,7 +25,7 @@ const CreateProduct = () => {
   const getAllCategory = async () => {
     try {
       // getting data from the backend from this URL
-      const {data} = await axios.get(`${process.env.REACT_APP_API}/api/v1/category/get-category`); 
+      const {data} = await axios.get(`${REACT_APP_API}/api/v1/category/get-category`); 
 
       if( data?.success ){
         setCategories(data?.category);
@@ -54,7 +56,7 @@ const CreateProduct = () => {
       photo && productData.append("photo", photo)  ;   // if photo present then only append
       productData.append("category", category);
 
-      const {data} = await axios.post(`${process.env.REACT_APP_API}/api/v1/product/create-product`, productData);   // all values are passed via this productData
+      const {data} = await axios.post(`${REACT_APP_API}/api/v1/product/create-product`, productData);   // all values are passed via this productData
 
       if( data?.success ){
         toast.success("Product created Successfully");
